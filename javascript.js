@@ -6,23 +6,29 @@ let gridSize = 16;
 
 reset.addEventListener('click', () => {
     eraseGrid();
+    createGrid(gridSize);
 });
 
 newSize.addEventListener('click', () =>{
     eraseGrid();
-    gridSize = prompt('enter a number from 1-100 for grid size');
-    gridSize < 101 ? createGrid(gridSize): alert('enter number between 1-100 please.');
+    gridSize = prompt('enter a number from 1-100 for grid size'), ('');
+    if ((gridSize == null) || (gridSize == '')) {
+        alert("Please enter a value");
+        createGrid(gridSize);
+        return;
+    }
+    else gridSize < 101 ? createGrid(gridSize): alert('enter number between 1-100 please.');
 });
 randomColor.addEventListener('click', () => {
-    alert('randomColor clicked');
+    randomColorFunc();
 });
 
 function eraseGrid(){
-    if (container.firstChild == null) {
+    if (container.firstChild === null) {
         return;
     }
     else {for (i = 0; i < gridSize; i++)
-    container.removeChild(container.lastChild);
+    container.removeChild(container.firstChild);
 }}
 
 function createGrid(gridSize){
@@ -35,6 +41,23 @@ function createGrid(gridSize){
         newCell.classList.add('grid');
         newRow.appendChild(newCell);
     }}
+    turnBlack();
 }
-console.log(container.hasChildNodes())
-console.log(container.firstChild)
+
+
+function turnBlack() {
+    let newCell = container.querySelectorAll('.grid');
+    newCell.forEach(grid => {grid.addEventListener("mouseenter", () => grid.style.backgroundColor = 'rgb(0,0,0)')})
+    };
+
+    function randomColorFunc() {
+    let newCell = container.querySelectorAll('.grid');
+    newCell.forEach(grid => {grid.addEventListener("mouseenter", () => grid.style.backgroundColor = `rgb(${random255()}, ${random255()}, ${random255()})` )
+    })};
+
+    function random255(){
+        return Math.floor(Math.random() *255);
+    }
+    
+
+    createGrid(gridSize);
