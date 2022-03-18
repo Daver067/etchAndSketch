@@ -1,8 +1,15 @@
 const reset = document.querySelector('#reset');
 const newSize = document.querySelector('#newSize');
+const colorBlack = document.querySelector('#black');
 const randomColor = document.querySelector('#randomColor');
-const container = document.getElementById('container')
+const container = document.getElementById('container');
+const mainTitle = document.querySelectorAll('span');
 let gridSize = 16;
+color = 'black'
+
+mainTitle.forEach(span => {span.addEventListener('mouseenter', () => 
+    span.style.color = `rgb(${random255()}, ${random255()}, ${random255()})`
+)})
 
 reset.addEventListener('click', () => {
     eraseGrid();
@@ -19,6 +26,11 @@ newSize.addEventListener('click', () =>{
     }
     else gridSize < 101 ? createGrid(gridSize): alert('enter number between 1-100 please.');
 });
+
+colorBlack.addEventListener('click', () => {;
+    turnBlack();
+})
+
 randomColor.addEventListener('click', () => {
     randomColorFunc();
 });
@@ -41,16 +53,18 @@ function createGrid(gridSize){
         newCell.classList.add('grid');
         newRow.appendChild(newCell);
     }}
-    turnBlack();
+    (color == 'black') ? turnBlack() : randomColorFunc();
 }
 
 
 function turnBlack() {
+    color = 'black';
     let newCell = container.querySelectorAll('.grid');
     newCell.forEach(grid => {grid.addEventListener("mouseenter", () => grid.style.backgroundColor = 'rgb(0,0,0)')})
     };
 
     function randomColorFunc() {
+    color = 'random';
     let newCell = container.querySelectorAll('.grid');
     newCell.forEach(grid => {grid.addEventListener("mouseenter", () => grid.style.backgroundColor = `rgb(${random255()}, ${random255()}, ${random255()})` )
     })};

@@ -48,12 +48,18 @@ button {
     color: black;
     border-radius: 8px;
     padding: 18px;
+    height: auto;
     width: 135px;
     margin-bottom: 100px;
+}
+button:hover {
+    background-color: blueviolet;
+    width: 150px;
+    height: auto;
 }
 .btns {
     margin-top: 3%;
     display: flex;
-    gap: 5%;
+    gap: 1%;
     justify-content: center;
 }
